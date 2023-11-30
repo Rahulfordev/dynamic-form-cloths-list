@@ -132,6 +132,15 @@ button.remove-all {
   }
 }
 
+@media screen and (max-width: 900px) {
+  .form-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 10px;
+    text-align: left;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .form-container {
     display: grid;
