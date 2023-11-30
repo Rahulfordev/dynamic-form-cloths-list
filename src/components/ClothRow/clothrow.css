@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.form-container {
+  font-family: "Montserrat", sans-serif;
+}
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  display: block;
+}
+
+input,
+textarea,
+select {
+  border: 2px solid #04aa6d;
+  margin-top: 5px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 2px solid #ff0000;
+  transition: 0.3s ease-in-out;
+  outline: none;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-column-gap: 10px;
+  text-align: left;
+}
+
+.form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.clothSize {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.submit-button {
+  padding: 10px 25px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #04aa6d;
+  border: 2px solid #04aa6d;
+  color: #fff;
+  transition: 0.4s;
+  &:hover {
+    color: #04aa6d;
+    background-color: transparent;
+  }
+}
+
+.cloth-size {
+  border: 2px solid #04aa6d;
+  padding: 10px;
+}
+
+/*   */
+
+.cloth-table {
+  overflow-x: auto;
+}
+
+table {
+  overflow-x: auto;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 40px;
+}
+
+td,
+th {
+  border: 1px solid rgb(185 175 175);
+  text-align: left;
+  padding: 8px;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+.delete-button {
+  cursor: pointer;
+}
+
+.remove__all-button {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+button.remove-all {
+  padding: 12px 45px;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  outline: none;
+  /* background: #04aa6d; */
+  background-color: #ff0000;
+  color: #fff;
+  transition: 0.4s;
+  &:hover {
+    background-color: #fff;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 10px;
+    text-align: left;
+  }
+}
