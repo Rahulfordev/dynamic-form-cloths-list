@@ -54,6 +54,9 @@ const ClothRow = () => {
       // console.log(inputValues);
       setInput([...inputs, inputValues]);
       event.target.reset();
+      // event.target = "";
+      // event.target.elements.value = "";
+      // console.log();
     }
   };
 
@@ -161,31 +164,44 @@ const ClothRow = () => {
           </div>
         </form>
         <div className="cloth-table">
-          <table>
-            <tr>
-              <th>Cloth ID</th>
-              <th>Cloth Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Color</th>
-              <th>Size</th>
-              <th>M. Date</th>
-              <th>Description</th>
-              <th>Delete</th>
-            </tr>
-            {inputs.map((input) => (
-              <ClothTable
-                key={input.clothId}
-                input={input}
-                handleDelete={handleDelete}
+          {inputs.length > 0 ? (
+            <div>
+              <table>
+                <tr>
+                  <th>Cloth ID</th>
+                  <th>Cloth Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Color</th>
+                  <th>Size</th>
+                  <th>M. Date</th>
+                  <th>Description</th>
+                  <th>Delete</th>
+                </tr>
+                {inputs.map((input) => (
+                  <ClothTable
+                    key={input.clothId}
+                    input={input}
+                    handleDelete={handleDelete}
+                  />
+                ))}
+              </table>
+              <div className="remove__all-button">
+                <button className="remove-all" onClick={() => setInput([])}>
+                  Remove All Cloth
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="empty-cloth">
+              <h1>No Clothes added</h1>
+              <img
+                src="https://media.tenor.com/Y3c23UQQ3MIAAAAC/empty-box.gif"
+                alt=""
+                style={{ width: "300px" }}
               />
-            ))}
-          </table>
-          <div className="remove__all-button">
-            <button className="remove-all" onClick={() => setInput([])}>
-              Remove All Cloth
-            </button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
