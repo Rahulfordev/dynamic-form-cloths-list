@@ -38,9 +38,10 @@ const ClothRow = () => {
 
     // same ID check
     if (clothPushIDd.length > 0) {
-      alert("not add duplicate ID");
+      alert("You can't add same ID 🥲");
       clothPushIDd.length = 0;
       event.target.reset();
+      // event.target = "";
       return;
     }
 
