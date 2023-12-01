@@ -38,15 +38,19 @@ const ClothRow = () => {
 
     // same ID check
     if (clothPushIDd.length > 0) {
+      console.log(clothPushIDd);
       alert("You can't add same ID 🥲");
       clothPushIDd.length = 0;
       event.target.reset();
       // event.target = "";
       return;
     }
+    console.log(clothPushIDd);
 
     // price and quantity check
-    if (inputValues.clothPrice <= 0) {
+    if (inputValues.clothId < 0) {
+      return alert("Cloth ID must be greater than 0");
+    } else if (inputValues.clothPrice <= 0) {
       return alert("Price must be greater than 0");
     } else if (inputValues.clothQuantity <= 0) {
       return alert("Quantity must be greater than 0");
