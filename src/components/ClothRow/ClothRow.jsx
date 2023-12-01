@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./clothrow.css";
-import ClothTable from "../ClothTable/ClothTable";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const getClothFormLocalstorage = () => {
   const data = localStorage.getItem("cloth");
@@ -9,6 +9,7 @@ const getClothFormLocalstorage = () => {
 
 const ClothRow = () => {
   const [inputs, setInput] = useState(getClothFormLocalstorage());
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -16,11 +17,20 @@ const ClothRow = () => {
     const inputElements = [...event.target.elements];
     inputElements.forEach((element) => {
       if (element.tagName !== "BUTTON") {
-        return (inputValues[element.name] = element.value);
+        inputValues[element.name] = element.value;
       }
-      setInput([...inputs, inputValues]);
-      element.value = "";
     });
+
+    if (inputValues.clothPrice <= 0) {
+      return alert("Price must be greater than 0");
+    } else if (inputValues.clothQuantity <= 0) {
+      return alert("Quantity must be greater than 0");
+    } else if (inputValues.clothId <= 0) {
+      return alert("Cloth Id must be greater than 0");
+    } else {
+      setInput([...inputs, inputValues]);
+      event.target.reset();
+    }
   };
 
   // delete Cloth
@@ -91,36 +101,36 @@ const ClothRow = () => {
           </div>
 
           <div className="cloth-size">
-            <p>Select Coloth Size:</p>
-            <div className="clothSize">
-              <label htmlFor="m-size">
+            <p>Select Cloth Size:</p>
+            <div className="clothSize-container">
+              <label htmlFor="M">
                 <input
                   value=""
                   type="radio"
                   name="clothSize"
-                  id="m-size"
+                  id="M"
                   required
                   placeholder=""
                 />{" "}
                 M
               </label>
-              <label htmlFor="l-size">
+              <label htmlFor="L">
                 <input
                   value=""
                   type="radio"
                   name="clothSize"
-                  id="l-size"
+                  id="L"
                   required
                   placeholder=""
                 />{" "}
                 L
               </label>
-              <label htmlFor="xl-size">
+              <label htmlFor="XL">
                 <input
                   value=""
                   type="radio"
                   name="clothSize"
-                  id="xl-size"
+                  id="XL"
                   required
                   placeholder=""
                 />{" "}
@@ -163,11 +173,22 @@ const ClothRow = () => {
               <th>Delete</th>
             </tr>
             {inputs.map((input) => (
-              <ClothTable
-                key={input.clothId}
-                handleDelete={handleDelete}
-                input={input}
-              />
+              <tr key={input.clothId}>
+                <td>{input.clothId}</td>
+                <td>{input.name}</td>
+                <td>{input.clothPrice * input.clothQuantity}</td>
+                <td>{input.clothQuantity}</td>
+                <td>{input.clothColor}</td>
+                <td>{input.clothSize}</td>
+                <td>{input.date}</td>
+                <td>{input.description}</td>
+                <td>
+                  <RiDeleteBin6Line
+                    onClick={() => handleDelete(input.clothId)}
+                    color="red"
+                  />
+                </td>
+              </tr>
             ))}
           </table>
           <div className="remove__all-button">

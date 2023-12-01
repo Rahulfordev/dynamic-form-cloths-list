@@ -43,7 +43,7 @@ select:focus {
   gap: 13px;
 }
 
-.clothSize {
+.clothSize-container {
   display: flex;
   align-items: center;
   gap: 15px;
