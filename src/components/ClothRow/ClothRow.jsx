@@ -1,33 +1,56 @@
 import { useEffect, useState } from "react";
 import "./clothrow.css";
-import { RiDeleteBin6Line } from "react-icons/ri";
-
-const getClothFormLocalstorage = () => {
-  const data = localStorage.getItem("cloth");
-  return data ? JSON.parse(data) : [];
-};
+import ClothTable from "../ClothTable/ClothTable";
+import { getClothFormLocalstorage } from "../database/DataBase";
 
 const ClothRow = () => {
   const [inputs, setInput] = useState(getClothFormLocalstorage());
+  let clothPushIDd = [];
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // console.log(event.targe);
     const inputValues = {};
     const inputElements = [...event.target.elements];
     inputElements.forEach((element) => {
+      // console.log(element.value);
+      if (element.name === "clothId") {
+        // console.log(element.value, "calue");
+        const b = inputs.filter((inputID) => inputID.clothId === element.value);
+        clothPushIDd.push(...b);
+      }
+
+      // console.log(clothPushIDd);
+      // if (element.clothId === event.target.clothId) {
+      //   console.log("id");
+      // }
+
       if (element.tagName !== "BUTTON") {
-        inputValues[element.name] = element.value;
+        // Cloth Size add
+        if (element.type === "radio" && element.checked) {
+          inputValues[element.name] = element.value;
+        } else if (element.type !== "radio") {
+          inputValues[element.name] = element.value;
+        }
       }
     });
 
+    // same ID check
+    if (clothPushIDd.length > 0) {
+      alert("not add duplicate ID");
+      clothPushIDd.length = 0;
+      event.target.reset();
+      return;
+    }
+
+    // price and quantity check
     if (inputValues.clothPrice <= 0) {
       return alert("Price must be greater than 0");
     } else if (inputValues.clothQuantity <= 0) {
       return alert("Quantity must be greater than 0");
-    } else if (inputValues.clothId <= 0) {
-      return alert("Cloth Id must be greater than 0");
     } else {
+      // console.log(inputValues);
       setInput([...inputs, inputValues]);
       event.target.reset();
     }
@@ -39,6 +62,7 @@ const ClothRow = () => {
     setInput(filterCloth);
   };
 
+  // localStorage add
   useEffect(() => {
     localStorage.setItem("cloth", JSON.stringify(inputs));
   }, [inputs]);
@@ -82,12 +106,12 @@ const ClothRow = () => {
             <label htmlFor="clothQuantity">Cloth Quantity:</label>
             <input
               type="number"
-              min="2"
+              min="1"
               max="15"
               name="clothQuantity"
               id="clothQuantity"
-              required
               placeholder="Enter Cloth Quantity"
+              required
             />
           </div>
           <div>
@@ -104,37 +128,13 @@ const ClothRow = () => {
             <p>Select Cloth Size:</p>
             <div className="clothSize-container">
               <label htmlFor="M">
-                <input
-                  value=""
-                  type="radio"
-                  name="clothSize"
-                  id="M"
-                  required
-                  placeholder=""
-                />{" "}
-                M
+                <input type="radio" name="clothSize" value="M" required /> M
               </label>
               <label htmlFor="L">
-                <input
-                  value=""
-                  type="radio"
-                  name="clothSize"
-                  id="L"
-                  required
-                  placeholder=""
-                />{" "}
-                L
+                <input type="radio" name="clothSize" value="L" required /> L
               </label>
               <label htmlFor="XL">
-                <input
-                  value=""
-                  type="radio"
-                  name="clothSize"
-                  id="XL"
-                  required
-                  placeholder=""
-                />{" "}
-                XL
+                <input type="radio" name="clothSize" required value="XL" /> XL
               </label>
             </div>
           </div>
@@ -165,30 +165,19 @@ const ClothRow = () => {
               <th>Cloth ID</th>
               <th>Cloth Name</th>
               <th>Price</th>
-              <th>Cloth Quantity</th>
-              <th>Cloth Color</th>
-              <th>Coloth Size</th>
-              <th>Manufacture Date</th>
+              <th>Quantity</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>M. Date</th>
               <th>Description</th>
               <th>Delete</th>
             </tr>
             {inputs.map((input) => (
-              <tr key={input.clothId}>
-                <td>{input.clothId}</td>
-                <td>{input.name}</td>
-                <td>{input.clothPrice * input.clothQuantity}</td>
-                <td>{input.clothQuantity}</td>
-                <td>{input.clothColor}</td>
-                <td>{input.clothSize}</td>
-                <td>{input.date}</td>
-                <td>{input.description}</td>
-                <td>
-                  <RiDeleteBin6Line
-                    onClick={() => handleDelete(input.clothId)}
-                    color="red"
-                  />
-                </td>
-              </tr>
+              <ClothTable
+                key={input.clothId}
+                input={input}
+                handleDelete={handleDelete}
+              />
             ))}
           </table>
           <div className="remove__all-button">
