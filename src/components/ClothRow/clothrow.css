@@ -1,8 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-.form-container {
-  font-family: "Montserrat", sans-serif;
+.form-container,
+.cloth__title {
+  font-family: "Jost", sans-serif;
 }
+
 .form input[type="text"],
 .form input[type="number"],
 .form input[type="date"],
@@ -80,6 +82,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  font-family: "Jost", sans-serif;
   margin-top: 40px;
 }
 
@@ -107,6 +110,7 @@ table tr:hover {
 }
 
 .delete-button {
+  font-family: "Jost", sans-serif;
   cursor: pointer;
 }
 

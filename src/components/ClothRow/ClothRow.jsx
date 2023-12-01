@@ -72,7 +72,8 @@ const ClothRow = () => {
   }, [inputs]);
 
   return (
-    <div>
+    <div className="cloths">
+      <h1 className="cloth__title">Cloths List Application</h1>
       <div className="form-container">
         <form onSubmit={handleSubmit} className="form" action="">
           <div>
