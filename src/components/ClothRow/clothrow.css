@@ -43,6 +43,8 @@ select:focus {
   display: flex;
   flex-direction: column;
   gap: 13px;
+  box-shadow: 0 7px 30px -10px #96aab480;
+  border-radius: 8px;
 }
 
 .clothSize-container {

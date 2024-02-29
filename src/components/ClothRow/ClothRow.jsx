@@ -39,7 +39,7 @@ const ClothRow = () => {
     // same ID check
     if (clothPushIDd.length > 0) {
       console.log(clothPushIDd);
-      alert("You can't add same ID 🥲");
+      alert("You can't add same ID 😢");
       clothPushIDd.length = 0;
       event.target.reset();
       // event.target = "";
@@ -149,7 +149,7 @@ const ClothRow = () => {
           </div>
           <div>
             <label htmlFor="date">Manufacture Date:</label>
-            <input type="date" id="date" name="date" />
+            <input type="date" id="date" name="date" required />
           </div>
           <div>
             <label htmlFor="description">Description</label>
